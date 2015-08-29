@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="http://getskeleton.com/dist/css/skeleton.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/layout-responsive.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/modernizr.custom.76129.js"></script>
+	<script src="js/dragscrollable.js"></script>
+</head>
+
+<body>
+
+	<div style="background-color:#d8cfc6; height:600px;">
+		<div id="timeline" style="width:100%;overflow:hidden">
+			<img src="images/scrollImage.jpg" />
+		</div>
+		<div class="arrowSlender">
+			<img src="images/arrow.png" />
+		</div>
+		<div class="timelineTitle">
+			<div class="datecontent"></div> 
+			<div class="titlecontent"></div>
+		</div>
+		<div class="timelineBody">
+			<div class="content">
+				
+			</div>
+		</div>
+	</div>
+	
+
+	<script>
+
+	var imageSize = $("#timeline img").width();
+	var sizeBuffer = 0;
+	var size;
+	var endPoint;
+	
+
+
+	var timelineContent = [
+		{
+			Date: "April 1994", 
+			Title: "New £50 enters circulation",
+			content: "Celebrating 300 years since the founding of the Bank of England, a new £50 note enters circulation featuring a portrait of its first Governor, Sir John Houblon. It remains legal tender until April 2014, when it is withdrawn as part of the Bank's regular review to make notes more secure and combat fraud. Of all the notes in circulation, the £50 is the most rare.",
+			image: "new50.jpg",
+			size960: [{
+				start: "320",
+				stop: "405"
+			}],
+			size768: [{
+				start: "96",
+				stop: "280"
+			}],
+			size480: [{
+				start: "129",
+				stop: "267"
+			}],
+			size320: [{
+				start: "80",
+				stop: "170"
+			}]
+		},
+		{
+			Date: "July 1994", 
+			Title: "Amazon opens for business",
+			content: "Launching initially as an online bookshop, Amazon quickly grows into the ‘Everything Store’ dreamed up by founder Jeff Bezos and helps change how we shop forever. By 2015, online shopping accounts for 15.2% of all UK retail sales and Brits make on average 21 online purchases a year (up from 19 in 2014).",
+			image: "amazon.jpg",
+			size960: [{
+				start: "575",
+				stop: "965"
+			}],
+			size768: [{
+				start: "249",
+				stop: "480"
+			}],
+			size480: [{
+				start: "246",
+				stop: "422"
+			}],
+			size320: [{
+				start: "158",
+				stop: "272"
+			}]
+		},
+		{
+			Date: "November 1994", 
+			Title: "First lottery draw",
+			content: "A £1 ticket offers a one-in-14 million chance of hitting the jackpot in the newly launched UK National Lottery. Seven winners each scoop £800,000 in the first draw. In 2004, EuroMillions launches and in 2011 provides the UK’s largest lottery win to date: £161,653,000. Around 70% of British people now play the lottery.",
+			size960: [{
+				start: "918",
+				stop: "1214"
+			}],
+			size768: [{
+				start: "455",
+				stop: "630"
+			}],
+			size480: [{
+				start: "404",
+				stop: "537"
+			}],
+			size320: [{
+				start: "260",
+				stop: "347"
+			}]
+		},
+		{
+			Date: "February 1995", 
+			Title: "Loyalty cards take off ",
+			content: "The launch of Tesco Clubcard is the first major loyalty card scheme to reward customers – and gather precious purchasing data. Other retailers such as Boots and Sainsbury’s soon follow suit and 20 years later around 75% of adults have a loyalty card in their wallets, owning between one and four cards each.",
+			size960: [{
+				start: "1175",
+				stop: "1815"
+			}],
+			size768: [{
+				start: "608",
+				stop: "991"
+			}],
+			size480: [{
+				start: "522",
+				stop: "813"
+			}],
+			size320: [{
+				start: "337",
+				stop: "527"
+			}]
+		},
+		{
+			Date: "September 1995", 
+			Title: "Auction site eBay is born ",
+			content: "Software developer Pierre Omidyar writes the code for the website that will become eBay. Originally called AuctionWeb, the site begins with the listing of a single broken laser pointer. When it sells for $14.83, Pierre realises he’s onto something big. By 2015, more than 18 million Britons visit eBay every month.",
+			size960: [{
+				start: "1774",
+				stop: "2247"
+			}],
+			size768: [{
+				start: "968",
+				stop: "1251"
+			}],
+			size480: [{
+				start: "798",
+				stop: "1013"
+			}],
+			size320: [{
+				start: "516",
+				stop: "636"
+			}]
+		},
+		{
+			Date: "February 1996", 
+			Title: "Private rail operators get going",
+			content: "The first private train operating companies start carrying passengers, accelerating the break-up of British Rail. Twenty years on, the effect on ticket prices is mixed; while season tickets have broadly kept pace with inflation, prices of same-day standard singles have often doubled in real terms. However, early bookers can snap up much cheaper advance fares.",
+			size960: [{
+				start: "2202",
+				stop: "3619"
+			}],
+			size768: [{
+				start: "1217",
+				stop: "2075"
+			}],
+			size480: [{
+				start: "995",
+				stop: "1644"
+			}],
+			size320: [{
+				start: "644",
+				stop: "1034"
+			}]
+		},
+		{
+			Date: "June 1997", 
+			Title: "Internet banking opens for business",
+			content: "RBS becomes the first British bank to launch an internet banking service. By 2015, around half of UK adults are banking via the internet. In 2014, RBS estimates that 5.6 million customers bank online, with one in five customers preferring to do all their banking digitally through a tablet, phone or other device.",
+			size960: [{
+				start: "3571",
+				stop: "4044"
+			}],
+			size768: [{
+				start: "2047",
+				stop: "2333"
+			}],
+			size480: [{
+				start: "1625",
+				stop: "1841"
+			}],
+			size320: [{
+				start: "1055",
+				stop: "1195"
+			}]
+		},
+		{
+			Date: "November 1997", 
+			Title: "£2 coin planned launch is delayed",
+			content: "The £2 coin is intended for distribution in November and millions of coins are struck in readiness. However the launch is delayed following concerns that the vending industry isn’t ready. By the time the coin is finally released in June 1998, the Queen’s portrait has been updated and both her old and new images are seen on the new £2.",
+			size960: [{
+				start: "4000",
+				stop: "4642"
+			}],
+			size768: [{
+				start: "2303",
+				stop: "2687"
+			}],
+			size480: [{
+				start: "1821",
+				stop: "2114"
+			}],
+			size320: [{
+				start: "1184",
+				stop: "1373"
+			}]
+		},
+		{
+			Date: "June 1998", 
+			Title: "Bank of england gains independence",
+			content: "The Bank of England is freed from political control when the 1998 Bank of England Act gives the Monetary Policy Committee responsibility for setting interest rates to meet inflation targets. Homeowners with tracker mortgages keenly watch the Committee’s monthly decision on interest rates.",
+			size960: [{
+				start: "4598",
+				stop: "4897"
+			}],
+			size768: [{
+				start: "2662",
+				stop: "2842"
+			}],
+			size480: [{
+				start: "2097",
+				stop: "2232"
+			}],
+			size320: [{
+				start: "1364",
+				stop: "1451"
+			}]
+		},
+		{
+			Date: "September 1998", 
+			Title: "<i>Who Wants to be A Millionaire? launches</i>",
+			content: "Chris Tarrant hosts a new ITV quiz in which contestants must answer 15 questions correctly to win an unprecedented prize of £1 million. On 29 November 2000 – 122 shows later – Judith Keppel becomes the UK’s first million-pound winner. At its peak, 19 million viewers tune in and <i>Millionaire</i> runs until December 2013.",
+			size960: [{
+				start: "4856",
+				stop: "5500"
+			}],
+			size768: [{
+				start: "2775",
+				stop: "3203"
+			}],
+			size480: [{
+				start: "2215",
+				stop: "2510"
+			}],
+			size320: [{
+				start: "1441",
+				stop: "1632"
+			}]
+		},
+		{
+			Date: "April 1999", 
+			Title: "ISAs change how we save",
+			content: "Tax-free individual savings accounts (ISAs) replace personal equity plans (PEPs) and tax-exempt special savings accounts (TESSAs). The first year tax-free ISA allowance is £7,000. A government report in 2015 (based on 2012-13 figures) reports that there are 22.7 million Adult ISA holders, holding average ISA savings of £18,173.",
+			size960: [{
+				start: "5454",
+				stop: "5675"
+			}],
+			size768: [{
+				start: "3176",
+				stop: "3308"
+			}],
+			size480: [{
+				start: "2490",
+				stop: "2589"
+			}],
+			size320: [{
+				start: "1620",
+				stop: "1685"
+			}]
+		},
+		{
+			Date: "June 1999", 
+			Title: "Edward Elgar £20 note is released",
+			content: "A new £20 note is released featuring the English composer of Land of Hope and Glory and the Enigma Variations. Sir Edward Elgar’s carefully drawn moustache is designed to make the note particularly tricky for forgers to replicate. As the UK’s most common banknote, the £20 is also the most commonly subject to forgery.",
+			size960: [{
+				start: "5624",
+				stop: "6269"
+			}],
+			size768: [{
+				start: "3279",
+				stop: "3661"
+			}],
+			size480: [{
+				start: "2569",
+				stop: "2862"
+			}],
+			size320: [{
+				start: "1672",
+				stop: "1863"
+			}]
+		},
+		{
+			Date: "January 2000", 
+			Title: "Millennium Bug averted",
+			content: "Several credit card transactions fail but concerns of the country grinding to a halt due to a ‘millennium bug’ seem overblown. Thanks to the preparatory work of millions of IT experts, it’s mostly business as usual in 2000.",
+			size960: [{
+				start: "6224",
+				stop: "6442"
+			}],
+			size768: [{
+				start: "3638",
+				stop: "3766"
+			}],
+			size480: [{
+				start: "2845",
+				stop: "2943"
+			}],
+			size320: [{
+				start: "1851",
+				stop: "1914"
+			}]
+		},
+		{
+			Date: "March 2000", 
+			Title: "Rightmove property website launches",
+			content: "Rightmove.com launches, helping would-be buyers (and a nation of nosey parkers) to view potential new homes from the comfort of their living rooms. Monday and Tuesday nights are the site’s busiest times and an all-purple house is the most viewed property to date – attracting more than 3 million hits in 2013.",
+			size960: [{
+				start: "6395",
+				stop: "8240"
+			}],
+			size768: [{
+				start: "3741",
+				stop: "4844"
+			}],
+			size480: [{
+				start: "2924",
+				stop: "3767"
+			}],
+			size320: [{
+				start: "1903",
+				stop: "2453"
+			}]
+		},
+		{
+			Date: "31 December 2001", 
+			Title: "Eve of a new Euro era",
+			content: "Twelve out of the 15 European Union countries prepare to adopt the Euro as currency on 1 January 2002. Britain (along with Sweden and Denmark) chooses not to join European Monetary Union. Euro price-watching becomes a new hobby for many British holidaymakers trying to choose the best time to buy the currency – the worst being July 2011 when one pound bought just €1.12.",
+			size960: [{
+				start: "3923",
+				stop: "8321"
+			}],
+			size768: [{
+				start: "4819",
+				stop: "4894"
+			}],
+			size480: [{
+				start: "3751",
+				stop: "3808"
+			}],
+			size320: [{
+				start: "2441",
+				stop: "2479"
+			}]
+		},
+		{
+			Date: "January 2002", 
+			Title: "Average house price passes £100,000",
+			content: "Prices soar by 6% in just three months leading Halifax to calculate in January 2002 that the UK average house costs £100,412 – the first time it has ever hit six figures. By June 2015, the average is £200,000.",
+			size960: [{
+				start: "8280",
+				stop: "8498"
+			}],
+			size768: [{
+				start: "4873",
+				stop: "5001"
+			}],
+			size480: [{
+				start: "3791",
+				stop: "3890"
+			}],
+			size320: [{
+				start: "2470",
+				stop: "2532"
+			}]
+		},
+		{
+			Date: "March 2002", 
+			Title: "Birth of the price comparison website",
+			content: "Confused.com launches, initially to enable consumers to find the best deal on car insurance by comparing prices. A new sector of price comparison websites soon follows, helping customers to source quotes for all types of insurance, utilities, travel and retail goods. It’s estimated that 20 million Brits now look for cheaper deals this way.",
+			size960: [{
+				start: "8450",
+				stop: "8663"
+			}],
+			size768: [{
+				start: "4975",
+				stop: "5100"
+			}],
+			size480: [{
+				start: "3868",
+				stop: "3965"
+			}],
+			size320: [{
+				start: "2519",
+				stop: "2582"
+			}]
+		},
+		{
+			Date: "May 2002", 
+			Title: "Death of the Phonecard",
+			content: "Introduced in 1981 to modernise phone box payments, sales of the Phonecard dwindle from 74 million in 1991 to 7.2m in 2001 as more and more people own mobile phones. BT announces the phase out of the Phonecard in May 2002 and inadvertently fuels a trend for ‘fusilately’ (collecting phone cards) in the UK.",
+			size960: [{
+				start: "8620",
+				stop: "9609"
+			}],
+			size768: [{
+				start: "5077",
+				stop: "5668"
+			}],
+			size480: [{
+				start: "3947",
+				stop: "4401"
+			}],
+			size320: [{
+				start: "2570",
+				stop: "2865"
+			}]
+		},
+		{
+			Date: "April 2003", 
+			Title: "Trial of Chip and PIN ",
+			content: "In a bid to beat credit card fraud, running at £434.6m in 2003, people in Northampton trial new-style cards that let customers confirm their identity with a four-digit Personal Identification Number (PIN), rather than by signing receipts. The technology is rolled out nationwide in 2006 with 128 million new cards issued.",
+			size960: [{
+				start: "9562",
+				stop: "10465"
+			}],
+			size768: [{
+				start: "5641",
+				stop: "6180"
+			}],
+			size480: [{
+				start: "4380",
+				stop: "4793"
+			}],
+			size320: [{
+				start: "2853",
+				stop: "3122"
+			}]
+		},
+		{
+			Date: "February 2004", 
+			Title: "Album sales hit peak",
+			content: "The February release of the year’s best-selling album, Scissor Sisters’ self-titled debut CD, contributes to a peak in the UK album market – Brits buy a record 163.4 million albums during 2004. Over the next 10 years album sales decline by 47%, even as the average real price of an album falls by almost as much – from £13.42 in 2004 to £7.84 in 2014.",
+			size960: [{
+				start: "10418",
+				stop: "11231"
+			}],
+			size768: [{
+				start: "6155",
+				stop: "6644"
+			}],
+			size480: [{
+				start: "4774",
+				stop: "5146"
+			}],
+			size320: [{
+				start: "3111",
+				stop: "3352"
+			}]
+		},
+		{
+			Date: "November 2004", 
+			Title: "UK ‘addicted to plastic’",
+			content: "There are eight million more credit cards in the UK than people, according to research from market analysts Datamonitor in 2004. The firm counts 67 million cards in circulation (compared to a population of 59 million at the time) and declares the country officially ‘addicted’ to plastic.",
+			size960: [{
+				start: "11188",
+				stop: "11666"
+			}],
+			size768: [{
+				start: "6617",
+				stop: "6901"
+			}],
+			size480: [{
+				start: "5128",
+				stop: "5344"
+			}],
+			size320: [{
+				start: "3340",
+				stop: "3483"
+			}]
+		},
+		{
+			Date: "April 2005", 
+			Title: "Children pocket more money",
+			content: "According to annual research released by Halifax, children in the UK receive an average of £8.37 per week. But it's the start of a decade-long slide in junior earning power – by 2015, the figure has dropped to only £6.20. As in the workplace, boys are more likely than girls to ask for a raise.",
+			size960: [{
+				start: "11616",
+				stop: "11917"
+			}],
+			size768: [{
+				start: "6874",
+				stop: "7053"
+			}],
+			size480: [{
+				start: "5325",
+				stop: "5461"
+			}],
+			size320: [{
+				start: "3469",
+				stop: "3557"
+			}]
+		},
+		{
+			Date: "July 2005", 
+			Title: "Low-cost air travel brings Europe closer",
+			content: "Ryanair celebrates its 20th anniversary by offering 100,000 flights at 99p. It’s the latest sales drive from the increasingly popular airline, which has increased its annual passengers from 5,000 in its first year to 34.8 million in 2005. By 2014-15, Ryanair has 90.6 million customers, and its average one-way flight costs £52.40.",
+			size960: [{
+				start: "11873",
+				stop: "12515"
+			}],
+			size768: [{
+				start: "7027",
+				stop: "7414"
+			}],
+			size480: [{
+				start: "5443",
+				stop: "5738"
+			}],
+			size320: [{
+				start: "3547",
+				stop: "3738"
+			}]
+		},
+		{
+			Date: "February 2006", 
+			Title: "Largest cash robbery in UK history",
+			content: "Raiders steal a record £53,116,760 from the Securitas depot in Tonbridge, Kent. Six months later, five of the robbers are charged and jailed and two further members are later arrested in Morocco. An eighth member of the gang is believed to have escaped to the West Indies and, to date, less than half the money has been recovered.",
+			size960: [{
+				start: "12472",
+				stop: "14135"
+			}],
+			size768: [{
+				start: "7387",
+				stop: "8386"
+			}],
+			size480: [{
+				start: "5719",
+				stop: "6481"
+			}],
+			size320: [{
+				start: "3725",
+				stop: "4223"
+			}]
+		},
+		{
+			Date: "September 2007", 
+			Title: "Contactless payment begins",
+			content: "Mastercard launches a card that allows shoppers to spend up to £10 without using a PIN. By 2014, contactless card payment is hugely popular – equating to a spend of £2.32bn or 319 million transactions. The UK Cards Association is set to raise the contactless spending limit to £30 in September 2015.",
+			size960: [{
+				start: "14098",
+				stop: "14306"
+			}],
+			size768: [{
+				start: "8363",
+				stop: "8489"
+			}],
+			size480: [{
+				start: "6466",
+				stop: "6561"
+			}],
+			size320: [{
+				start: "4213",
+				stop: "4275"
+			}]
+		},
+		{
+			Date: "November 2007", 
+			Title: "iPhone arrives in the UK",
+			content: "The much-hyped iPhone goes on sale in the UK at £269 with a £35 minimum phone contract. It rapidly becomes one of the most popular smartphones in the UK and worldwide by March 2015, global sales reach an astonishing 700 million.",
+			size960: [{
+				start: "14270",
+				stop: "14655"
+			}],
+			size768: [{
+				start: "8465",
+				stop: "8695"
+			}],
+			size480: [{
+				start: "6545",
+				stop: "6720"
+			}],
+			size320: [{
+				start: "4264",
+				stop: "4379"
+			}]
+		},
+		{
+			Date: "March 2008", 
+			Title: "Household debt at a record high",
+			content: "At the start of 2008, the average UK household owes almost twice as much as it earns – household debt exceeds household income by a huge 74%, up from only 4% a decade before. Debt-to-income ratios subsequently fall as the economy begins to slow down, but by 2015 are growing again, and are predicted to exceed their previous levels by 2020.",
+			size960: [{
+				start: "14612",
+				stop: "14742"
+			}],
+			size768: [{
+				start: "8670",
+				stop: "8748"
+			}],
+			size480: [{
+				start: "6703",
+				stop: "6759"
+			}],
+			size320: [{
+				start: "4368",
+				stop: "4405"
+			}]
+		},
+		{
+			Date: "April 2008", 
+			Title: "Royal Mint reveals new designs",
+			content: "Following a competition to design the first new British coin series for 40 years, the Royal Mint reveals the winning entry by 26-year-old Matthew Dent from Bangor, Gwynedd. From mid-2008 all coins except the £2 are issued with his new design, which uses elements of the royal coat of arms; it is the first wholesale redesign of British coinage since decimalisation.",
+			size960: [{
+				start: "14686",
+				stop: "15172"
+			}],
+			size768: [{
+				start: "8724",
+				stop: "9003"
+			}],
+			size480: [{
+				start: "6743",
+				stop: "6957"
+			}],
+			size320: [{
+				start: "4394",
+				stop: "4533"
+			}]
+		},
+		{
+			Date: "September 2008", 
+			Title: "Global financial crisis comes to a head",
+			content: "The bankruptcy of Lehman Brothers, a US investment bank heavily exposed to sub-prime mortgage debt, prompts worldwide financial panic. From September 2008 the UK is also officially in recession – the economy won't recover to pre-crash levels until the second half of 2013.",
+			size960: [{
+				start: "15126",
+				stop: "15509"
+			}],
+			size768: [{
+				start: "8979",
+				stop: "9209"
+			}],
+			size480: [{
+				start: "6939",
+				stop: "7113"
+			}],
+			size320: [{
+				start: "4523",
+				stop: "4637"
+			}]
+		},
+		{
+			Date: "January 2009", 
+			Title: "Introduction of Bitcoin",
+			content: "Bitcoin, a crypto-currency beyond the control of governments, central banks or tax collectors, is introduced to the world. It allows peer-to-peer payments between individuals and businesses, and gains popularity in shadier corners of the internet. From an initial value of pennies, hype and speculation push the value of one bitcoin to £751.38 in December 2013, turning some savvy bitcoin holders into millionaires.",
+			size960: [{
+				start: "15467",
+				stop: "15681"
+			}],
+			size768: [{
+				start: "9185",
+				stop: "9314"
+			}],
+			size480: [{
+				start: "7097",
+				stop: "7193"
+			}],
+			size320: [{
+				start: "4624",
+				stop: "4687"
+			}]
+		},
+		{
+			Date: "March 2009", 
+			Title: "Interest rates hit a historic low",
+			content: "In a bid to encourage more lending by banks and to help push the UK economy out of recession, the Bank of England cuts interest rates to a historic low of 0.5%. Savers groan while those with tracker mortgages jump for joy.",
+			size960: [{
+				start: "15638",
+				stop: "15768"
+			}],
+			size768: [{
+				start: "9287",
+				stop: "9364"
+			}],
+			size480: [{
+				start: "7174",
+				stop: "7233"
+			}],
+			size320: [{
+				start: "4669",
+				stop: "4713"
+			}]
+		},
+		{
+			Date: "December 2009", 
+			Title: "Crowdfunding kicks off",
+			content: "Kickstarter is launched as a ‘crowdfunding’ platform in which backers pledge money to fund creative projects posted on the website such as films, stage shows, video games, food start-ups and technology. To date, more than $1.5 billion has been pledged worldwide ($55 million in the UK).",
+			size960: [{
+				start: "15726",
+				stop: "16454"
+			}],
+			size768: [{
+				start: "9341",
+				stop: "9776"
+			}],
+			size480: [{
+				start: "7216",
+				stop: "7548"
+			}],
+			size320: [{
+				start: "4702",
+				stop: "965"
+			}],
+		},
+		{
+			Date: "December 2009", 
+			Title: "Cheques ‘to be phased out’",
+			content: "As cheque usage falls to 3.5 million a day in 2009 (from a peak of 11m a day in 1990), the Payments Council announces that cheques should be phased out by 2018 – as long as adequate alternative forms of payment are developed. In the face of consumer pressure and Treasury concern following the announcement, the Council later rescinds this target.",
+			size960: [{
+				start: "16409",
+				stop: "16971"
+			}],
+			size768: [{
+				start: "9751",
+				stop: "10079"
+			}],
+			size480: [{
+				start: "7529",
+				stop: "7786"
+			}],
+			size320: [{
+				start: "4908",
+				stop: "5073"
+			}]
+		},
+		{
+			Date: "June 2010", 
+			Title: "First UK newspaper paywall",
+			content: "The Times and Sunday Times are the first national newspapers to start charging readers to access content. Users are initially charged £1 a day or £2 a week to access both papers’ websites.",
+			size960: [{
+				start: "16922",
+				stop: "17906"
+			}],
+			size768: [{
+				start: "10058",
+				stop: "10644"
+			}],
+			size480: [{
+				start: "7766",
+				stop: "8215"
+			}],
+			size320: [{
+				start: "5061",
+				stop: "5354"
+			}]
+		},
+		{
+			Date: "May 2011", 
+			Title: "Mobile banking hits the App Store",
+			content: "Building on an earlier app that lets users check their balances on the go, RBS launches the UK’s first fully-functional mobile banking app. In its first six months over a million users sign up to the free service and more than £1 billion is transferred using the app.",
+			size960: [{
+				start: "17853",
+				stop: "17955"
+			}],
+			size768: [{
+				start: "10622",
+				stop: "10698"
+			}],
+			size480: [{
+				start: "8199",
+				stop: "8256"
+			}],
+			size320: [{
+				start: "5304",
+				stop: "5380"
+			}]
+		},
+		{
+			Date: "June 2011", 
+			Title: "Self-published author sells a million",
+			content: "American businessman John Locke becomes the first self-published Kindle author to sell more than a million books, managing the feat in just five months. He then writes an eBook about how he did it.",
+			size960: [{
+				start: "17950",
+				stop: "18419"
+			}],
+			size768: [{
+				start: "10675",
+				stop: "10954"
+			}],
+			size480: [{
+				start: "8239",
+				stop: "8451"
+			}],
+			size320: [{
+				start: "5369",
+				stop: "5509"
+			}]
+		},
+		{
+			Date: "November 2011", 
+			Title: "Junior ISA accounts open",
+			content: "After scrapping Child Trust Funds, the Coalition Government introduces tax-free Junior ISAs to encourage saving for children. By the end of the first tax year the take-up rate is 1%.",
+			size960: [{
+				start: "18377",
+				stop: "18760"
+			}],
+			size768: [{
+				start: "10931",
+				stop: "11158"
+			}],
+			size480: [{
+				start: "8435",
+				stop: "8609"
+			}],
+			size320: [{
+				start: "5498",
+				stop: "5610"
+			}]
+		},
+		{
+			Date: "March 2012", 
+			Title: "Stamp price hike",
+			content: "The Royal Mail announces that the price of a first class stamp is set to increase from 46p to 60p and second class from 36p to 50p in a bid to maintain its one-price-whatever-the distance universal service. Between 2006 and 2012, postal volumes have declined by 25% as people switch to text messaging and emails.",
+			size960: [{
+				start: "18720",
+				stop: "18845"
+			}],
+			size768: [{
+				start: "11136",
+				stop: "11221"
+			}],
+			size480: [{
+				start: "8592",
+				stop: "8657"
+			}],
+			size320: [{
+				start: "5601",
+				stop: "5640"
+			}]
+		},
+		{
+			Date: "April 2012", 
+			Title: "Fuel price hits a historic peak",
+			content: "A litre of unleaded petrol costs 141.9p in April 2012, almost 50p more than five years earlier. Volatility in the Middle East and a weak pound are blamed. By April 2015, the price has fallen back to 113.8p.",
+			size960: [{
+				start: "18806",
+				stop: "19016"
+			}],
+			size768: [{
+				start: "11188",
+				stop: "11310"
+			}],
+			size480: [{
+				start: "8632",
+				stop: "8727"
+			}],
+			size320: [{
+				start: "5641",
+				stop: "5626"
+			}]
+		},
+		{
+			Date: "June 2012", 
+			Title: "Mobile replaces cards at ATMs ",
+			content: "Royal Bank of Scotland (RBS) and NatWest customers can now use ATMs by making a request on their handset. The Get Cash service works via the banks’ app and aims to help people who have lost or forgotten their card, or those who want to leave their wallet at home. It has a limit of £100 per use.",
+			size960: [{
+				start: "18977",
+				stop: "19531"
+			}],
+			size768: [{
+				start: "11290",
+				stop: "11621"
+			}],
+			size480: [{
+				start: "8710",
+				stop: "8964"
+			}],
+			size320: [{
+				start: "5677",
+				stop: "5842"
+			}]
+		},
+		{
+			Date: "December 2012", 
+			Title: "Cost of childcare soars",
+			content: "Over the previous ten years childcare costs have increased by 61%, according to a survey by insurers LV. Combined with the rising cost of education (up 124%, largely due to rising university fees), the average cost of raising a child to the age of 21 has risen to £222,458 (up from £140,398 in 2003).",
+			size960: [{
+				start: "19490",
+				stop: "20388"
+			}],
+			size768: [{
+				start: "11598",
+				stop: "12137"
+			}],
+			size480: [{
+				start: "8946",
+				stop: "9358"
+			}],
+			size320: [{
+				start: "5831",
+				stop: "6099"
+			}]
+		},
+		{
+			Date: "October 2013", 
+			Title: "Lotto ticket price doubles",
+			content: "Tickets double in price to £2, as a number of changes are announced to the National Lottery in an effort to reverse dwindling participation 19 years after its launch. Average jackpots are set to increase to £5 million on Saturdays, and three matching numbers mean a prize of £25, up from £10.",
+			size960: [{
+				start: "20346",
+				stop: "20564"
+			}],
+			size768: [{
+				start: "12111",
+				stop: "12240"
+			}],
+			size480: [{
+				start: "9339",
+				stop: "9437"
+			}],
+			size320: [{
+				start: "6088",
+				stop: "6151"
+			}]
+		},
+		{
+			Date: "December 2013", 
+			Title: "Plastic notes on their way",
+			content: "The Bank of England announces that the next £5 note, set for launch in the second half of 2015 and featuring Sir Winston Churchill, will be printed on polymer (a thin and flexible plastic material that is more durable than paper). Clydesdale Bank beats the Bank of England to launch the UK's first polymer banknotes in March 2015.",
+			size960: [{
+				start: "20517",
+				stop: "20817"
+			}],
+			size768: [{
+				start: "12214",
+				stop: "12390"
+			}],
+			size480: [{
+				start: "9419",
+				stop: "9557"
+			}],
+			size320: [{
+				start: "6139",
+				stop: "6228"
+			}]
+		},
+		{
+			Date: "March 2014", 
+			Title: "Airbnb is here to stay",
+			content: "Airbnb, an online platform that matches people renting out their homes with travellers on a budget, announces that one million guests from the UK have travelled using its service. As well as low costs, a unique experience and friendly hosts are part of the appeal to guests. The most popular destinations for UK Airbnb travellers are London, Paris, New York, Barcelona and Amsterdam.",
+			size960: [{
+				start: "20773",
+				stop: "20997"
+			}],
+			size768: [{
+				start: "12368",
+				stop: "12503"
+			}],
+			size480: [{
+				start: "9537",
+				stop: "9637"
+			}],
+			size320: [{
+				start: "6216",
+				stop: "6281"
+			}]
+		},
+		{
+			Date: "May 2014", 
+			Title: "Retirement age increases to 67",
+			content: "People retiring after 2026 will have to work for longer as the eligibility age for the State Pension increases to 67. The newly passed Pensions Act (2014) also allows for further future amendments to the pensionable age, linked to changes in life expectancy.",
+			size960: [{
+				start: "20945",
+				stop: "21935"
+			}],
+			size768: [{
+				start: "12471",
+				stop: "13064"
+			}],
+			size480: [{
+				start: "9616",
+				stop: "10071"
+			}],
+			size320: [{
+				start: "6268",
+				stop: "6562"
+			}]
+		},
+		{
+			Date: "April 2015", 
+			Title: "Digital download sales overtake physical sales",
+			content: "Global revenue from music downloads and subscriptions overtakes sales of physical formats for the first time. The International Federation of the Phonographic Industry (IFPI) reports that digital revenue grew nearly 7% to $6.85 billion, while physical sales — of which CDs make up the vast majority — fell 8% to $6.82 billion. Revenue from music streaming also grows by 40% during the year.",
+			size960: [{
+				start: "21887",
+				stop: "22024"
+			}],
+			size768: [{
+				start: "13065",
+				stop: "13116"
+			}],
+			size480: [{
+				start: "10049",
+				stop: "10110"
+			}],
+			size320: [{
+				start: "6548",
+				stop: "6589"
+			}]
+		},
+		{
+			Date: "May 2015", 
+			Title: "Cashless payments overtake cash",
+			content: "Cashless payments in the UK have overtaken cash transactions for the first time, according to the Payments Council. Cash was used in 48% of transactions in 2014, with electronic transactions, card and cheque payments hitting 52%. However cash remained the preferred method of payment in more than eight out of 10 purchases in pubs, clubs, and newsagents.",
+			size960: [{
+				start: "21973",
+				stop: "22189"
+			}],
+			size768: [{
+				start: "13090",
+				stop: "13217"
+			}],
+			size480: [{
+				start: "10089",
+				stop: "10186"
+			}],
+			size320: [{
+				start: "6577",
+				stop: "6639"
+			}]
+		},
+		{
+			Date: "July 2015", 
+			Title: "Apple Pay hits the UK",
+			content: "Nine months after its US debut, the UK launch of Apple’s digital wallet service turns an iPhone 6 or Apple Watch into a contactless payment device. Paying for bus and tube travel in London is initially the most popular use for the service, despite the risk of running out of battery mid-journey.",
+			size960: [{
+				start: "22143",
+				stop: "22443"
+			}],
+			size768: [{
+				start: "13190",
+				stop: "13370"
+			}],
+			size480: [{
+				start: "10167",
+				stop: "10305"
+			}],
+			size320: [{
+				start: "6628",
+				stop: "6716"
+			}]
+		},
+		{
+			Date: "October 2015", 
+			Title: "MoneySense turns 21",
+			content: "To celebrate 21 years of supporting young people with financial education, MoneySense launches a new programme for 5-18 year olds. By making financial education feel real, relevant and engaging, it aims to help at least 1 million young people in the UK and Ireland develop their understanding of money over the next three years.",
+			size960: [{
+				start: "22400",
+				stop: "30000"
+			}],
+			size768: [{
+				start: "13344",
+				stop: ""
+			}],
+			size480: [{
+				start: "10286",
+				stop: ""
+			}],
+			size320: [{
+				start: "6704",
+				stop: ""
+			}]
+		}
+		
+	];
+
+	function clearContent(){
+		$(".timelineTitle .datecontent").html("")
+		$(".timelineTitle .titlecontent").html("")
+		$(".timelineBody .content").html("")
+	}
+
+	function showTimelineData(myArrayNum){
+		$(".timelineTitle .datecontent").html(timelineContent[myArrayNum].Date)
+		$(".timelineTitle .titlecontent").html(timelineContent[myArrayNum].Title)
+		$(".timelineBody .content").html(timelineContent[myArrayNum].content)
+	}
+
+	//sizeBuffer can be used to add smaller shifts to screen widths
+	function showContent(){
+		if( $(this).scrollLeft() === 0 ){
+			clearContent()
+		}
+
+		//Set the content points as well as iframe size etc
+		if ( $(window).width() >= 940 ) {
+			$("#theTimeline").parent().parent().parent().addClass("container")
+			size = "size960"
+			endPoint = 85;
+			$('#theTimeline').width("940")
+			window.parent.$("#theTimeline").height( "750" )
+			sizeBuffer = 0
+		}
+
+		if ($(window).width() == 1024) {
+			$("#theTimeline").parent().parent().parent().addClass("container")
+            size = "size960"
+            endPoint = 85;
+            $('#theTimeline').width("768")
+            window.parent.$("#theTimeline").height("650")
+            sizeBuffer = 0
+        }
+
+        if ($(window).width() >= 768 && $(window).width() <= 939) {
+        	$("#theTimeline").parent().parent().parent().removeClass("container").addClass("align-center")
+            size = "size768"
+            endPoint = 51;
+            $('#theTimeline').width("768")
+            window.parent.$("#theTimeline").height("650")
+        }
+
+		if ( $(window).width() >= 480 && $(window).width() <= 767 ) {
+			$("#theTimeline").parent().parent().parent().removeClass("container").addClass("align-center")
+			size = "size480"
+			endPoint = 39;
+			$('#theTimeline').width("480")
+			window.parent.$("#theTimeline").height("450")
+		}
+
+		if ( $(window).width() >= 320 && $(window).width() <= 479 ) {
+			$("#theTimeline").parent().parent().parent().removeClass("container").addClass("align-center")
+			size = "size320"
+			endPoint = 25;
+			$('#theTimeline').width("320")
+			window.parent.$("#theTimeline").height( window.parent.$("#theTimeline").width() )
+		}
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[0][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[0][size][0].start) + endPoint ){
+			showTimelineData(0);
+		}
+		
+
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[1][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[1][size][0].start) + endPoint ){
+			showTimelineData(1);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[2][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[2][size][0].start) + endPoint ){
+			showTimelineData(2);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[3][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[3][size][0].start) + endPoint ){
+			showTimelineData(3);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[4][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[4][size][0].start) + endPoint ){
+			showTimelineData(4);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[5][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[5][size][0].start) + endPoint ){
+			showTimelineData(5);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[6][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[6][size][0].start) + endPoint ){
+			showTimelineData(6);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[7][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[7][size][0].start) + endPoint ){
+			showTimelineData(7);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[8][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[8][size][0].start) + endPoint ){
+			showTimelineData(8);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[9][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[9][size][0].start) + endPoint ){
+			showTimelineData(9);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[10][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[10][size][0].start) + endPoint ){
+			showTimelineData(10);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[11][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[11][size][0].start) + endPoint ){
+			showTimelineData(11);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[12][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[12][size][0].start) + endPoint ){
+			showTimelineData(12);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[13][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[13][size][0].start) + endPoint ){
+			showTimelineData(13);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[14][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[14][size][0].start) + endPoint ){
+			showTimelineData(14);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[15][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[15][size][0].start) + endPoint ){
+			showTimelineData(15);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[16][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[16][size][0].start) + endPoint ){
+			showTimelineData(16);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[17][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[17][size][0].start) + endPoint ){
+			showTimelineData(17);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[18][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[18][size][0].start) + endPoint ){
+			showTimelineData(18);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[19][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[19][size][0].start) + endPoint ){
+			showTimelineData(19);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[20][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[20][size][0].start) + endPoint ){
+			showTimelineData(20);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[21][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[21][size][0].start) + endPoint ){
+			showTimelineData(21);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[22][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[22][size][0].start) + endPoint ){
+			showTimelineData(22);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[23][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[23][size][0].start) + endPoint ){
+			showTimelineData(23);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[24][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[24][size][0].start) + endPoint ){
+			showTimelineData(24);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[25][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[25][size][0].start) + endPoint ){
+			showTimelineData(25);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[26][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[26][size][0].start) + endPoint ){
+			showTimelineData(26);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[27][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[27][size][0].start) + endPoint ){
+			showTimelineData(27);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[28][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[28][size][0].start) + endPoint ){
+			showTimelineData(28);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[29][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[29][size][0].start) + endPoint ){
+			showTimelineData(29);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[30][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[30][size][0].start) + endPoint ){
+			showTimelineData(30);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[31][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[31][size][0].start) + endPoint ){
+			showTimelineData(31);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[32][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[32][size][0].start) + endPoint ){
+			showTimelineData(32);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[33][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[33][size][0].start) + endPoint ){
+			showTimelineData(33);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[34][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[34][size][0].start) + endPoint ){
+			showTimelineData(34);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[35][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[35][size][0].start) + endPoint ){
+			showTimelineData(35);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[36][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[36][size][0].start) + endPoint ){
+			showTimelineData(36);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[37][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[37][size][0].start) + endPoint ){
+			showTimelineData(37);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[38][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[38][size][0].start) + endPoint ){
+			showTimelineData(38);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[39][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[39][size][0].start) + endPoint ){
+			showTimelineData(39);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[40][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[40][size][0].start) + endPoint ){
+			showTimelineData(40);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[41][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[41][size][0].start) + endPoint ){
+			showTimelineData(41);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[42][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[42][size][0].start) + endPoint ){
+			showTimelineData(42);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[43][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[43][size][0].start) + endPoint ){
+			showTimelineData(43);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[44][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[44][size][0].start) + endPoint ){
+			showTimelineData(44);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[45][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[45][size][0].start) + endPoint ){
+			showTimelineData(45);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[46][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[46][size][0].start) + endPoint ){
+			showTimelineData(46);
+		}
+		
+
+		if( $('#timeline').scrollLeft() >= Number(timelineContent[47][size][0].start) && $('#timeline').scrollLeft() <= Number(timelineContent[47][size][0].start) + endPoint ){
+			showTimelineData(47);
+		}
+		
+
+		if( $('#timeline').scrollLeft() > Number(timelineContent[48][size][0].start)){
+			showTimelineData(48);
+		}
+		
+	}
+
+		$(document).ready(function(){
+
+			$('#timeline').dragscrollable({
+			    dragSelector: 'img', 
+			    acceptPropagatedEvent: true
+			});
+
+			$('#timeline').on('touchmove', function(e) {
+				showContent();
+			});
+
+			//960
+			$('#timeline').on('mousemove', function(e) {
+				showContent();
+				console.log($('#timeline').scrollLeft())
+				console.log($(this).scrollLeft() + ' - ' + $(this)[0].scrollWidth);
+			});
+
+			
+		   
+		});
+
+		$(window).resize(function () {
+	        if ($(window).width() >= 940) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() == 1024) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() >= 768 && $(window).width() <= 939) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() >= 480 && $(window).width() <= 767) {
+	            $(".arrowSlender img").attr("src", "images/arrowSm.png")
+	        }
+
+	        if ($(window).width() >= 320 && $(window).width() <= 479) {
+	            $(".arrowSlender img").attr("src", "images/arrowSm.png")
+	        }
+
+	    });
+
+	    $(document).ready(function(){
+	    	if ($(window).width() >= 940) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() == 1024) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() >= 768 && $(window).width() <= 939) {
+	            $(".arrowSlender img").attr("src", "images/arrow.png")
+	        }
+
+	        if ($(window).width() >= 480 && $(window).width() <= 767) {
+	            $(".arrowSlender img").attr("src", "images/arrowSm.png")
+	        }
+
+	        if ($(window).width() >= 320 && $(window).width() <= 479) {
+	            $(".arrowSlender img").attr("src", "images/arrowSm.png")
+	        }
+	    });
+
+	$(function() {
+	    if (Modernizr.touch) {
+	        $("#timeline").css("overflow-x", "auto");
+	    }
+	});
+
+
+	</script>
+
+</body>
+</html>

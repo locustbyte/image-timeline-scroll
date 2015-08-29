@@ -1,0 +1,133 @@
+
+
+/* Table of Contents
+==================================================
+    #Base 960 Grid
+    #Tablet (Portrait)
+    #Mobile (Portrait)
+    #Mobile (Landscape)
+    #Clearing */
+
+
+
+/* #Base 960 Grid
+================================================== */
+
+
+
+
+
+/* #Tablet (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 939px) {
+        
+        #timeline img{
+            height: 300px;
+        }
+
+        .timelineTitle{
+            margin-top: 0px;
+        }
+        .timelineTitle .datecontent, .timelineTitle .titlecontent{
+            font-size: 20px !important;
+        }
+
+        .timelineBody .content {
+            font-size: 25px;
+        }
+
+    }
+
+
+    @media only screen and (max-width: 767px) and (min-width: 480px){
+
+         #timeline img{
+            height: 230px !important;
+        }
+
+        .timelineTitle{
+            margin-top: 0px;
+        }
+        .timelineTitle .datecontent, .timelineTitle .titlecontent{
+            font-size: 20px !important;
+        }
+
+        .timelineBody .content {
+            font-size: 15px !important;
+        }
+
+        
+         
+
+        
+    }
+
+    @media only screen and (max-width: 959px) {
+        
+        
+
+
+    }
+
+
+
+
+    @media only screen and (max-width: 767px) {
+
+        #timeline img{
+            height: 150px;
+        }
+
+        .timelineTitle{
+            margin-top: 0px;
+        }
+        .timelineTitle .datecontent, .timelineTitle .titlecontent{
+            font-size: 15px;
+        }
+
+        .timelineBody .content {
+            font-size: 10px;
+        }
+
+        .arrowSlender {
+
+            margin-top: -24px;
+            background: url('../images/arrStripSm.png');
+        }
+
+
+   
+    }
+
+    @media (min-width: 400px) {
+        
+    }
+
+    /* #Mobile (Landscape)
+    ================================================== */
+
+    /* Note: Design for a width of 480px */
+
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+    }
+
+
+    /* Note: Design for a width of 480px */
+
+
+    @media only screen and (min-width: 300px) and (max-width: 767px) {
+
+
+    }
+
+    @media only screen and (min-width: 768px) and (max-width:1100px) {
+    
+    
+   }
+
